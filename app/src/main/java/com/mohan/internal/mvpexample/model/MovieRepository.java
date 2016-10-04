@@ -34,22 +34,22 @@ public class MovieRepository implements MovieDataSource {
 
     }
 
-    public void loadMoviesFromNetwork(@NonNull final LoadMoviesCallback callback){
+    public void loadMoviesFromNetwork(@NonNull final LoadMoviesCallback callback) {
         Retrofit retrofit = RestClient.getClient();
-        String apiToken = "66731d2e5d5e953395193ec20af94cac";
+        String apiToken = "";  // replace with yor api key of moviesdb
 
         final NetworkCall networkCall = retrofit.create(NetworkCall.class);
         networkCall.getMovies(apiToken).enqueue(new Callback<MoviesResponse>() {
             @Override
             public void onResponse(Call<MoviesResponse> call, Response<MoviesResponse> response) {
-                if(response.isSuccessful()) {
+                if (response.isSuccessful()) {
                     List<Movie> movieList = response.body().getResults();
-                    if(movieList.isEmpty()){
+                    if (movieList.isEmpty()) {
                         callback.onDataNotAvailable();
-                    }else {
+                    } else {
                         callback.onMoviesLoaded(movieList);
                     }
-                }else {
+                } else {
                     try {
                         callback.onNetworkError(response.errorBody().string());
                     } catch (IOException e) {
@@ -65,7 +65,7 @@ public class MovieRepository implements MovieDataSource {
 
                 callback.onNetworkError(t.getMessage());
                 t.printStackTrace();
-                Log.d(TAG, "onFailure: "+t.getMessage());
+                Log.d(TAG, "onFailure: " + t.getMessage());
             }
         });
 

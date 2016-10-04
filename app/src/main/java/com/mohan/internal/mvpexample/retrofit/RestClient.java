@@ -11,8 +11,6 @@ public class RestClient {
 
     private static Retrofit retrofit;
     static String URL="http://api.themoviedb.org";
-    //v5CXXRF1nsyEAFs2shT3hcynsHEA2yVpPmoxk4oNLkdGKP2ci3RYupX7vSxu
-
 
     public static Retrofit getClient(){
         if(retrofit==null){
