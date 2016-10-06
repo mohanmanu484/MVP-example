@@ -43,6 +43,8 @@ public class MoviePresenter implements MoviesContract.Presenter {
         loadMovies();
     }
 
+
+
     private void loadMovies() {
         mMovieView.showProgress();
         mMovieRepository.getMovies(new MovieDataSource.LoadMoviesCallback() {
@@ -59,6 +61,7 @@ public class MoviePresenter implements MoviesContract.Presenter {
 
             @Override
             public void onNetworkError(String message) {
+                mMovieView.hideProgress();
                 mMovieView.showNetworkError(message);
             }
         });

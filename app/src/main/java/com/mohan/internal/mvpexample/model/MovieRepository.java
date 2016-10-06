@@ -34,11 +34,35 @@ public class MovieRepository implements MovieDataSource {
 
     }
 
+    private void loadMovies(@NonNull final LoadMoviesCallback callback){
+        Retrofit retrofit = RestClient.getClient();
+        String apiToken = "";  // replace with yor api key of moviesdb
+
+        final NetworkCall networkCall = retrofit.create(NetworkCall.class);
+
+       /* networkCall.getMoviesList(apiToken)// One second delay for demo purposes
+                .delay(1L, java.util.concurrent.TimeUnit.SECONDS)
+                .subscribeOn(Schedulers.io())
+                // Write to Realm on Computation scheduler
+                .observeOn(Schedulers.computation())
+                .map()
+
+                // Read results in Android Main Thread (UI)
+                .observeOn(AndroidSchedulers.mainThread())
+                .map();*/
+    }
+
+
+
+
+
+
     public void loadMoviesFromNetwork(@NonNull final LoadMoviesCallback callback) {
         Retrofit retrofit = RestClient.getClient();
         String apiToken = "";  // replace with yor api key of moviesdb
 
         final NetworkCall networkCall = retrofit.create(NetworkCall.class);
+
         networkCall.getMovies(apiToken).enqueue(new Callback<MoviesResponse>() {
             @Override
             public void onResponse(Call<MoviesResponse> call, Response<MoviesResponse> response) {

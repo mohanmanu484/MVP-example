@@ -30,5 +30,5 @@ public interface MovieDataSource {
 
     void getMovies(@NonNull LoadMoviesCallback callback);
 
-    void getMovie(@NonNull String taskId, @NonNull GetMovieCallback callback);
+    void getMovie(@NonNull String movieId, @NonNull GetMovieCallback callback);
 }
