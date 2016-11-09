@@ -50,17 +50,30 @@ public class MoviePresenter implements MoviesContract.Presenter {
         mMovieRepository.getMovies(new MovieDataSource.LoadMoviesCallback() {
             @Override
             public void onMoviesLoaded(List<Movie> movies) {
+
+                if(!mMovieView.isActive()){
+                    return;
+                }
+
                 mMovieView.hideProgress();
                 mMovieView.showMovies(movies);
             }
 
             @Override
             public void onDataNotAvailable() {
+
+                if(!mMovieView.isActive()){
+                    return;
+                }
                 mMovieView.hideProgress();
             }
 
             @Override
             public void onNetworkError(String message) {
+
+                if(!mMovieView.isActive()){
+                    return;
+                }
                 mMovieView.hideProgress();
                 mMovieView.showNetworkError(message);
             }
